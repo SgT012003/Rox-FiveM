@@ -122,17 +122,22 @@ RegisterCommand('kit',function(source,args,rawCommand)
         if args[1] then
             if cmd1 == 'set' then
                 if args[2] then
-                    vRPclient.giveWeapons(nsource,{["weapon_pistol_mk2"] = { ammo = 250 }})
-                    vRP.giveInventoryItem(nsource,"bandagem",3)
-                    vRP.giveInventoryItem(nsource,"mochila",3)
-                    vRP.giveInventoryItem(nsource,"radio",1)
-                    vRP.giveInventoryItem(nsource,"compattach",1)
-                    vRP.giveInventoryItem(nsource,"cocaina",10)
-                    vRP.giveInventoryItem(nsource,"maconha",10)
-                    vRP.giveInventoryItem(nsource,"metanfetamina",10)
-                    TriggerClientEvent("Notify",source,"sucesso","Você Setou o Kit Inicial no [ID: "..args[2].."]")
-                    TriggerClientEvent("Notify",nsource,"sucesso","Você recebeu o Kit Inicial do [ID: "..user_id.."]")
-                    SendWebhookMessage(webhookkit,"```prolog\n[Kit - Set Kit]:\n[ID]: "..user_id.." setou o Kit no [ID]: "..args[2]..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S").."\r```")
+                    if cmd2 == user_id then
+                        TriggerClientEvent("Notify",source,"negado","Erro, não pode setar kit em si mesmo!")
+                        return
+                    else
+                        vRPclient.giveWeapons(nsource,{["weapon_pistol_mk2"] = { ammo = 250 }})
+                        vRP.giveInventoryItem(nsource,"bandagem",3)
+                        vRP.giveInventoryItem(nsource,"mochila",3)
+                        vRP.giveInventoryItem(nsource,"radio",1)
+                        vRP.giveInventoryItem(nsource,"compattach",1)
+                        vRP.giveInventoryItem(nsource,"cocaina",10)
+                        vRP.giveInventoryItem(nsource,"maconha",10)
+                        vRP.giveInventoryItem(nsource,"metanfetamina",10)
+                        TriggerClientEvent("Notify",source,"sucesso","Você Setou o Kit Inicial no [ID: "..args[2].."]")
+                        TriggerClientEvent("Notify",nsource,"sucesso","Você recebeu o Kit Inicial do [ID: "..user_id.."]")
+                        SendWebhookMessage(webhookkit,"```prolog\n[Kit - Set Kit]:\n[ID]: "..user_id.." setou o Kit no [ID]: "..args[2]..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S").."\r```")
+                    end
                 else
                     TriggerClientEvent("Notify",source,"negado","Erro, comando invalido [ /kit set <value> ]")
                 end
